@@ -13,8 +13,10 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Run bash"
-        run: node ./auto.sh
+      - name: Run auto.sh script
+        run: |
+          chmod +x auto.sh
+          ./auto.sh
 
       - name: "Commit"
         uses: EndBug/add-and-commit@v4
