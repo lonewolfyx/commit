@@ -25,6 +25,8 @@ jobs:
         ./auto.sh
 
     - name: Commit and push changes
+      env:
+        PAT_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         git add .
         git commit -m "auto push commit"
