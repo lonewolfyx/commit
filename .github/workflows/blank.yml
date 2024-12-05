@@ -1,0 +1,31 @@
+name: Run and Commit Auto Script
+
+on:
+  push:
+    branches:
+      - origin
+  workflow_dispatch:
+
+jobs:
+  run-auto-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git user
+      run: |
+        git config --global user.name "lonewolfyx"
+        git config --global user.email "877085893@qq.com"
+
+    - name: Run auto.sh script
+      run: |
+        chmod +x auto.sh
+        ./auto.sh
+
+    - name: Commit and push changes
+      run: |
+        git add .
+        git commit -m "auto push commit"
+        git push
