@@ -1,33 +1,22 @@
 name: Run and Commit Auto Script
 
-on:
-  push:
-    branches:
-      - origin
-  workflow_dispatch:
-
 jobs:
-  run-auto-script:
+  bots:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: "Checkout code"
+        uses: actions/checkout@v1
 
-    - name: Set up Git user
-      run: |
-        git config --global user.name "lonewolfyx"
-        git config --global user.email "877085893@qq.com"
+      - name: "Run bash"
+        run: node ./auto.sh
 
-    - name: Run auto.sh script
-      run: |
-        chmod +x auto.sh
-        ./auto.sh
+      - name: "Commit"
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: lonewolfyx
+          author_email: 877085893@qq.com
+          message: "auto push commit"
+          add: "."
 
-    - name: Commit and push changes
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      run: |
-        git add .
-        git commit -m "auto push commit"
-        git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
