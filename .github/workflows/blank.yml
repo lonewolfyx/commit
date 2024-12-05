@@ -1,5 +1,11 @@
 name: Run and Commit Auto Script
 
+on:
+  push:
+    branches:
+      - origin main
+  workflow_dispatch:
+
 jobs:
   bots:
     runs-on: ubuntu-latest
